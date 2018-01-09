@@ -28,7 +28,7 @@ All code can also be found on my GitHub repository [here](https://github.com/qui
 
 
 
-### `pi_log_data_py2.py`
+### _`pi_log_data_py2.py`_
 
 This is the Python script used to run everything including serial connection, API calls, and data collection.
 
@@ -121,7 +121,7 @@ if __name__ == '__main__':
 
 
 
-### `run_gas_log`
+### _`run_gas_log`_
 
 Here's the Bash script run every 24 hours using a cron-job. This was necessary because for some reason, the Python script would crash about every 2 days. This script navigates to the folder where the main Python script is located, runs it until it crashes, log the error, and restart the script again. Not an elegant solution, but it worked well enough.
 
@@ -139,7 +139,7 @@ cd /
 
 
 
-### `nano.ino`
+## _`nano.ino`_
 
 This is the Arduino code that collects a reading from the MQ135 sensor about every 10 minutes. Now, this should be replaced by an interrupt rather than messing around with trying to time everything precisely. The Pi could remotely program the Arduino Nano using [Platformio](http://platformio.org/).
 
