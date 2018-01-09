@@ -32,7 +32,7 @@ All code can also be found on my GitHub repository [here](https://github.com/qui
 
 This is the Python script used to run everything including serial connection, API calls, and data collection.
 
-```python
+``` python
 import os, sys, traceback
 import time as t
 
@@ -125,7 +125,7 @@ if __name__ == '__main__':
 
 Here's the Bash script run every 24 hours using a cron-job. This was necessary because for some reason, the Python script would crash about every 2 days. This script navigates to the folder where the main Python script is located, runs it until it crashes, log the error, and restart the script again. Not an elegant solution, but it worked well enough.
 
-```bash
+``` bash
 #!/bin/bash
 sleep 11
 cd /
@@ -179,4 +179,4 @@ I posted these images in a previous post (10/27/15), but should be of more value
 ![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/gasmonitor-setup.jpg "Setup next to carbon filters")
 
 # Final Thoughts
-This project is by no means perfect or even very good. However, it means a lot to me because it allowed me to realize that I wanted to pursue a career in computer & electrical engineering. Working through how to code on hardware platforms to using APIs showed me exactly how much there is out there to learn, and gave me the confidence and desire to be a part of this fast-paced industry. I believe everyone who is curious should pick up a project of their own to work on to completion and feel the same sense of accomplishment. So effectively, this project and post simultaneously closes my environmental engineering chapter and opens up my ECE chapter. I hope you join me as I dive into this perpetual quest of learning.
+This project is by no means perfect or even very good. However, it means a lot to me because it allowed me to realize that I wanted to pursue a career in computer & electrical engineering. Working through how to code on hardware platforms to using APIs showed me how much there is to learn out there, and gave me the confidence and desire to be a part of this fast-paced industry. I believe everyone who is curious should pick up a project of their own to work on to completion and feel the same sense of accomplishment. So effectively, this project and post simultaneously closes my environmental engineering chapter and opens up my ECE chapter. I hope you join me as I dive into this perpetual quest of learning.
