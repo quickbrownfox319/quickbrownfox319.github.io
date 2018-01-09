@@ -169,7 +169,7 @@ void loop() {
 }
 ```
 
-##Images and Setup
+## Images and Setup
 I posted these images in a previous post (10/27/15), but should be of more value now that you have context behind them.
 
 ![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/gasmonitor-pi.jpg "Raspberry Pi 2 controller")
