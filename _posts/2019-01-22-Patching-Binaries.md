@@ -1,5 +1,3 @@
-# Patching Binaries
-
 ### Background
 I've been playing around with IDA as an exercise for both work and leisure. IDA is a powerful disassembler by HexRays, which can basically turn any binary of almost any architecture into its assembly instructions. This makes debugging and reversing much easier, though can still be tricky to get familiar with. In this exercise, I'll show you how to reverse a simple crackme and patch it so we'll always get to the right answer with IDA. The binary I'm using is "Easy_ELF" from [reversing.kr](http://reversing.kr).
 
