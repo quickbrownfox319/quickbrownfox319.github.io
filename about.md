@@ -4,11 +4,9 @@ title: About
 permalink: /about/
 ---
 
-My foray into the world of programming and tech by building from the ground up.
+Minding tech and security and things I find interesting.
 
 ### Contact me
 
-[quickbrownfox319@gmail.com](mailto:quickbrownfox319@gmail.com)
+[blog@dchen.dev](mailto:blog@dchen.dev)
 
-
-[Resume](/assets/DanielChen_Resume.pdf)
