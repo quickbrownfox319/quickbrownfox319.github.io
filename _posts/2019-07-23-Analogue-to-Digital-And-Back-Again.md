@@ -14,6 +14,9 @@ The 5.8GHz band is a much wider space, and as a result allows more devices to co
 This post is a bit brief because there's a lot of information that can easily be strewn together. I would have liked to cover software defined radios as it's very relevant, but that deserves an entire post on it's own. Here are some good resources that probably explain everything I just said, but better.
 
 https://www.tutorialspoint.com/wi-fi/index.htm
+
 https://www.elttam.com.au/blog/intro-sdr-and-rf-analysis/
+
 https://en.wikibooks.org/wiki/Communication_Systems/What_is_Modulation%3F
+
 https://en.wikipedia.org/wiki/List_of_WLAN_channels
