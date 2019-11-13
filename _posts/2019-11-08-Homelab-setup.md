@@ -15,7 +15,7 @@ Homelabbing is basically taking point #2 above and beyond for micromanaging your
 My current homelab is still a work in progress, but you can separate it into two groups: the virtualized and software side, and the hardware side.
 
 ### Hardware
-Current hardware is a combination of salvaged and newly purchased. If you look online, you'd be surprised how cheap enterprise hardware can be. For now, my setup is home/small business level, but it'd be nice to one day have a rack server with the the likes of a Dell R740 running in it.
+Current hardware is a combination of salvaged and newly purchased. If you look online, you'd be surprised how cheap enterprise hardware can be. For now, my setup is home/small business level, but it'd be nice to one day have a rack server with a Dell R740 running in it.
 
   * Unifi Edgerouter X - Router and firewall.
   * Unifi UAP Pro - WiFi AP for wireless clients.
