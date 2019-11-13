@@ -27,8 +27,8 @@ Current hardware is a combination of salvaged and newly purchased. If you look o
 I was originally going to use XenServer as my hypervisor, but wanted to try an opensource alternative and settled on [XCP-ng](https://xcp-ng.org/), the opensource fork of Citrix's XenServer. Virtual machines I have so far:
 
   * [Xen Orchestra](https://xen-orchestra.com/#!/xo-home) - management VM to handle overview, creation, backups, etc.
-  * [Pi-hole](https://pi-hole.net/) - DNS server for blocking ads. This is probably my favorite network tool.
-  * Unifi Controller - For managing the UAP Pro, allowing me to manage wifi clients. In the future, additional UAPs would also be handled here.
+  * [Pi-hole](https://pi-hole.net/) - DNS server for blocking ads. This is probably my favorite service I am running.
+  * Unifi Controller - For managing the UAP Pro, allowing me to manage wifi clients, and finely tune the radios. In the future, additional UAPs would also be handled here.
 
 The nice thing about virtualizing is that if things go wrong, I can restore the backups of my VMs to a point that worked before. By having my system perform monthly backups, I (hopefully) won't have to go too far back to restore my network to a working state. Additionally, everything is handled on a single machine. This is a two-edged sword, as on one hand I can easily move to a different location and get things going again pretty quickly. On the other hand, a physically damaged machine without offsite backups is a very bad situation to be in. The largest advantage to virtualization for me is the ability to self-host my own services and start moving away from relying on companies that control my data. Future services and features I'd like to implement in no particular order:
 
