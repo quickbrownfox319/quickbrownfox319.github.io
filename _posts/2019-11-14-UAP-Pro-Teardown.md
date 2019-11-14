@@ -24,4 +24,4 @@ Some things of interest here:
 Most interesting thing (to me) is the big fat [Macronix MX25L12835FMI-10G](https://www.digikey.com/product-detail/en/macronix/MX25L12835FMI-10G/1092-1147-ND/4211592) flash chip, probably used to hold firmware.
 
 
-If you want to reverse the firmware, you luckily don't need to dump the flash or intercept traffic as you can download it directly from [Unifi's website](https://www.ui.com/download/unifi/).
+If you want to reverse the firmware, you luckily don't need to dump the flash or intercept traffic as you can download it directly from [Unifi's website](https://www.ui.com/download/unifi/). I'd like to poke at those interesting looking open serial ports to see what they actually are, and if they offer more secrets than what is available through their interface. Looking forward to hacking this one up a bit in the near future and seeing what it is capable of.
