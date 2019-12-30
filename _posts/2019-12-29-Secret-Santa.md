@@ -22,10 +22,12 @@ I mainly used these because these are what I had on hand. The Heltec board is re
 ### Access Point set up
 The juicy stuff! For the Raspberry Pi, you need to set it as an access point. This is controlled by two services called `hostapd` and `dnsmasq`. `hostapd` handles the configuration for the access point side of things such as what SSID it should broadcast, password, encryption, and channel configuration to list a few things. `dnsmasq` handles the DNS forwarding as well as DHCP for your IP addresses. Before you start, make sure you can access the Pi through something other than wifi, such as directly connecting to it through an ethernet cable. Then, bring down the services.
 
+
 ```
 sudo systemctl stop hostapd
 sudo systemctl stop dnsmasq
 ```
+
 
 Edit the DHCP configuration file for our wireless interface.
 
@@ -38,6 +40,7 @@ Then configure the wireless interface to have a static IP address.
 
 `sudo vi /etc/network/interfaces`
 
+
 ```bash
 allow-hotplug wlan0
 iface wlan0 inet static
@@ -47,9 +50,11 @@ iface wlan0 inet static
     broadcast 192.168.0.255
 ```
 
+
 We then want to configure `hostapd.conf` so that it knows how to act as an access point.
 
 `sudo vi /etc/hostapd/hostapd.conf`
+
 
 ```bash
 interface=wlan0
@@ -68,6 +73,7 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 ```
 
+
 A few things about this:
 * `interface=wlan0` means we're setting the interface it's broadcasting on to thw `wlan0` interface, which should be our default wireless interface.
 * `ssid` is obviously where you set your SSID you want to broadcast
@@ -85,6 +91,8 @@ Next, we'll need to point the `hostapd` service to the correct configuration fil
 Lastly, we need to configure `dnsmasq` to actually hand out IP addresses to devices that connect.
 
 `sudo vi /etc/dnsmasq.conf`
+
+
 ```bash
 interface=wlan0
 listen-address=192.168.0.1
@@ -111,10 +119,12 @@ sudo systemctl restart dnsmasq
 
 If you have issues, you can try debugging by checking their statuses:
 
+
 ```
 sudo systemctl status hostapd
 sudo systemctl status dnsmasq
 ```
+
 
 If those have errors, you can check for more details with `sudo journalctl -xe`
 
@@ -126,7 +136,7 @@ In case he got into the Pi this far, I also left a fl4g file with the exact loca
 
 Below is the code for the Heltec board. Essentially, it connects to the hardcoded access point with its credentials and  displays the RSSI from packets broadcsted by the Pi. All of the wifi heavy lifting is handled by Arduino's WiFi library, and the OLED display I used [U8g2](https://github.com/olikraus/u8g2/wiki/u8x8reference). To make things easier for the gift recipient, I also send over a serial connection the SSID and PSK in case he plugged it in.
 
-```C++
+```cpp
 #include "WiFi.h"
 #include <U8x8lib.h>
 
