@@ -38,7 +38,7 @@ Then configure the wireless interface to have a static IP address.
 
 `sudo vi /etc/network/interfaces`
 
-```
+```bash
 allow-hotplug wlan0
 iface wlan0 inet static
     address 192.168.0.1
@@ -51,7 +51,7 @@ We then want to configure `hostapd.conf` so that it knows how to act as an acces
 
 `sudo vi /etc/hostapd/hostapd.conf`
 
-```
+```bash
 interface=wlan0
 driver=nl80211
 ssid=NORTH_POLE
@@ -85,7 +85,7 @@ Next, we'll need to point the `hostapd` service to the correct configuration fil
 Lastly, we need to configure `dnsmasq` to actually hand out IP addresses to devices that connect.
 
 `sudo vi /etc/dnsmasq.conf`
-```
+```bash
 interface=wlan0
 listen-address=192.168.0.1
 bind-interfaces
@@ -124,9 +124,9 @@ In case he got into the Pi this far, I also left a fl4g file with the exact loca
 
 ### Heltec Code
 
-Below is the code for the Heltec board. Essentially, it connects to the hardcoded access point with its credentials and  displays the RSSI from packets broadcsted by the Pi. To make things easier, I also set it to send over a serial connection the SSID and PSK in case he thought to try plugging it in.
+Below is the code for the Heltec board. Essentially, it connects to the hardcoded access point with its credentials and  displays the RSSI from packets broadcsted by the Pi. All of the wifi heavy lifting is handled by Arduino's WiFi library, and the OLED display I used [U8g2](https://github.com/olikraus/u8g2/wiki/u8x8reference). To make things easier for the gift recipient, I also send over a serial connection the SSID and PSK in case he plugged it in.
 
-```
+```C++
 #include "WiFi.h"
 #include <U8x8lib.h>
 
@@ -180,4 +180,4 @@ void loop()
 
 ## In Action
 
-![Action shot!](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/secret_santa/inaction.mp4)
+![Action shot!](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/secret_santa/inaction.gif)
