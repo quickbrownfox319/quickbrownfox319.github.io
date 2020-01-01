@@ -75,11 +75,11 @@ rsn_pairwise=CCMP
 
 
 A few things about this:
-* `interface=wlan0` means we're setting the interface it's broadcasting on to thw `wlan0` interface, which should be our default wireless interface.
+* `interface=wlan0` means we're setting the interface it's broadcasting on to the `wlan0` interface, which should be our default wireless interface.
 * `ssid` is obviously where you set your SSID you want to broadcast
 * `hw_mode=g` is the 802.11 standard you want the radio to work in. In this case, 802.11g is for working in the 2.4GHz band, which we'll want for maximum distance.
 * `channel` lets us decide what channel to broadcast on, which is channel 7 on the 2.4GHz band.
-* `wpa_passphrass` is where you'd provide the password to the network.
+* `wpa_passphrase` is where you'd provide the password to the network.
 
 Next, we'll need to point the `hostapd` service to the correct configuration file we just edited by uncommenting the `DAMEON_CONF` parameter and providing it with our `hostapd.conf` path.
 
@@ -104,9 +104,9 @@ dhcp-range=192.168.0.10,192.168.0.50,24h
 ```
 
 A few things about what we just did:
-* `interface=wlan0` we again set our interface `dnsmasq` will be working on to `wlan0`.
+* `interface=wlan0` we again set the interface `dnsmasq` will be working on to `wlan0`.
 * `listen-address` is the address of our radio, which we statically set earlier to 192.168.0.1.
-* `server=8.8.8.8` is the DNS server any actual DNS requests will be made, which is set to Google for now.
+* `server=8.8.8.8` is the address of the DNS server for any DNS requests, which we've set to Google's DNS server for now.
 * `dhcp-range` is the starting and ending IP addresses it will give to devices, as well as how long the lease will be for those addresses.
 
 
@@ -134,7 +134,7 @@ In case he got into the Pi this far, I also left a fl4g file with the exact loca
 
 ### Heltec Code
 
-Below is the code for the Heltec board. Essentially, it connects to the hardcoded access point with its credentials and  displays the RSSI from packets broadcsted by the Pi. All of the wifi heavy lifting is handled by Arduino's WiFi library, and the OLED display I used [U8g2](https://github.com/olikraus/u8g2/wiki/u8x8reference). To make things easier for the gift recipient, I also send over a serial connection the SSID and PSK in case he plugged it in.
+Below is the code for the Heltec board. Essentially, it connects to the hardcoded access point with its credentials and  displays the RSSI from packets broadcasted by the Pi. All of the wifi heavy lifting is handled by Arduino's WiFi library, and the OLED display I used the [U8g2](https://github.com/olikraus/u8g2/wiki/u8x8reference) library. To make things easier for the gift recipient, I also send the SSID and PSK as clues over a serial connection when you plug it in.
 
 ```cpp
 #include "WiFi.h"
