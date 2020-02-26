@@ -20,12 +20,12 @@ Cafe Enchante is all the way out in the Outer Richmond area on Geary Blvd. It's 
 ### WiFi
 WiFi is pretty good here, with no noticeable drops in connection and a reasonably fast connection. Even with a dozen+ people inside there were never any hiccups. I probably would not recommend torrenting things here.
 
-### Workability Rating
-Lots of seating, lots of outlets, no *real* expectation of buying anything when you come in (though you should be nice and do it), good wifi. Negatives are for the lack of heat. Wouldn't kill to turn up the thermostat a tiny bit. I'd give this a 9/10.
+### Workability
+Lots of seating, lots of outlets, no *real* expectation of buying anything when you come in (though you should be nice and do it), good wifi. Negatives are for the lack of heat. Wouldn't kill to turn up the thermostat a tiny bit. I'd give this a 8/10.
 
 Ambience: 8/10  
 Coffee: 6/10  
-Workability: 9/10
+Workability: 8/10
 
 ## Peets Coffee on 10th & Mission St.
 ### Coffee
@@ -40,13 +40,13 @@ It's located right next to the Big N tech companies such as Twitter, Uber, and S
 ### WiFi
 WiFi was good. It did what I wanted such as searching StackOverflow and watching Youtube. No password required to log in. As always with public coffee shops, take some precaution on your internet safety.
 
-### Workability Rating
+### Workability
 Decent seating overall despite the numbers and outlets to boot. It was a bit dirty though, and tables were kind of rickety. I wouldn't feel safe leaving my laptop by itself for any period of time though. It was also a bit distracting with people always moving through it and loud music that I could hear through my earbuds. 5/10 overall.
 
 
 Ambience: 6/10  
 Coffee: 6/10  
-Workability: 6/10
+Workability: 5/10
 
 
 ## Coffee Cultures
@@ -62,10 +62,50 @@ Not too far from tech giants Twitter and Uber, this particular location is on th
 ### WiFi
 WiFi is pretty good, password protected though so you have to ask the barista. There have been Yelp reviews of the internet being spotty here, but so far I have not experienced any of these.
 
-### Workability Rating
+### Workability
 I don't really like having my back to the bar counter where anyone waiting in line can look over my shoulder and see what I'm doing on my computer if I sit along the window, but there are really no other places to work. There are outlets however, which is always a plus. Coffee is okay, music isn't obnoxious. It is cold though, and can be busy. I'd give it an 6/10.
 
 
 Ambience: 7/10  
 Coffee: 7/10  
 Workability: 6/10
+
+
+## Java Beach
+### Coffee
+Coffee was not bad, wasn't sour from sitting too long. What did I buy? Good ol' house brew. At this point you can probably guess that the average price of joe would be $2.60 and you'd be spot on.
+
+### Food
+Didn't try any, but from my recollection they had your standard fare of danish and croissants. From their Yelp page they also have sandwiches and breakfast fare like bagels and oatmeal as well.
+
+### Location and Ambience
+Located along La Playa St, it's right next to the ocean. It's pretty nice in the middle of the day, though it did help that the day was a balmy 68*F. No parking lot, but street parking wasn't too bad if you're willing to walk about a block. As for the ambience, it was a bit crowded, possibly due to the nice weather. There are a  lot of tables and seats though, both inside and outdoors. I do have to say that some of the seating were benches that you wooden had to share with strangers, so every time someone got up or sat down you'd feel it. If you're sensitive to that kind of thing it could be a problem, but there were other individual seats as well. Outlets were scarce or non existant from what I remember, so remember to charge your laptop before coming.
+
+### WiFi
+WiFi held up well given the large volume of people. My friend who was doing a video lecture was able to watch without problem.
+
+### Workability
+I would say this would have been pretty solid place to work if there were less people and more outlets. It was too distracting with how many people were coming and going. There were a lot more people working here however than most of the other places I've been to, so people do manage. Cute place with lots of seating, and supposing you snagged an outlet. Also a short walk to the beach for a break which is a nice change of scenery. Unfortunate otherwise if you needed to grind things out.
+
+
+Ambience: 6/10  
+Coffee: 6/10  
+Workability 4/10  
+
+
+## Sextant Coffee Roasters
+### Coffee
+I actually enjoyed the house brew here, as it had a nice nutty flavor to it. There were a lot of options and being a roastery, you can tell they take their craft pretty seriously with their Ethiopian beans.
+
+### Food
+Sorry, got nothing about what they have here. I think they sell pretty much only coffee.
+
+### Location and Ambience
+You're in SoMa along Folsom St, so it's easy to see that it's a gentrifying area with a mix of bougie coffee shops and auto body repair warehouses. The coffee shop itself sort of blends into the area with the industrial roasting equipment, bare brick walls, and exposed piping, which I liked. Seating was a bit rickety though, and the tables were pretty small. A lot of business people were there, so it seems to be a popular spot for one on ones and meetings.
+
+### Workability
+I'm going to start combining WiFi under Workability as you kind of need both nowadays. WiFi worked well enough, with no hiccups. Seating was sort of limited or awkward, meant to be shared with more people than individual seating in my opinion. Half of the room had some smaller more personal tables and chairs and the other had the tall tables with stools, which I personally hate. Outlets were limited yet again.
+
+Ambience: 5/10  
+Coffee: 8/10  
+Workability: 5/10  
