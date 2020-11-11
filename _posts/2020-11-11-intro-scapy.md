@@ -76,7 +76,7 @@ phy#1
 (scapy) daniel@thinking:~$ sudo ip link set wlan0mon up
 ```
 
-So what happened here? What we did was essentially what a tool like aircrack-ng does under the hood when you set your interface into monitor mode, except here we used Linux's built-in [`iw`](https://linux.die.net/man/8/iw) and ['ip'](https://linux.die.net/man/8/ip) tools to interact with our wireless interfaces. First, with `iw dev`, we show a list of all our active wireless interfaces, mine being `wlan0`. If it's active, we need to shut it down with `ip link set wlan0 down`. Next, we create our virtual interface (`wlan0`) off of the physical interface (`phy1`)([^1]), using `iw phy phy1 interface add wlan0mon type monitor`. Delete our old managed interface `iw dev wlan0 del`, and we can bring it back up with `ip link set wlan0mon up`. If you didn't get any errors, the result should look something like this:
+So what happened here? What we did was essentially what a tool like aircrack-ng does under the hood when you set your interface into monitor mode, except here we used Linux's built-in [`iw`](https://linux.die.net/man/8/iw) and [`ip`](https://linux.die.net/man/8/ip) tools to interact with our wireless interfaces. First, with `iw dev`, we show a list of all our active wireless interfaces, mine being `wlan0`. If it's active, we need to shut it down with `ip link set wlan0 down`. Next, we create our virtual interface (`wlan0`) off of the physical interface (`phy1`)([^1]), using `iw phy phy1 interface add wlan0mon type monitor`. Delete our old virtual managed interface `iw dev wlan0 del`, and we can bring our new virtual monitor interface up with `ip link set wlan0mon up`. If you didn't get any errors, the result should look something like this:
 
 ```bash
 (scapy) daniel@thinking:~$ iw dev
@@ -176,16 +176,16 @@ If we open up Wireshark in another window and start capturing while sending, we'
 
 ![Wireshark](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20201111/wireshark.png)
 
-[^2]: These addresses will depend on the type and subtype of the packet. Data and management frames for address fields generally are the same. Control frames however can vary widely, and may even only have only one address field. Here's a [quirk source](https://dalewifisec.wordpress.com/2014/05/17/the-to-ds-and-from-ds-fields/) for to/from DS fields.
+[^2]: These addresses will depend on the type and subtype of the packet. Data and management frames for address fields generally are the same. Control frames however can vary widely, and may even only have only one address field. Here's a [quick source](https://dalewifisec.wordpress.com/2014/05/17/the-to-ds-and-from-ds-fields/) for to/from DS fields.
 
-[^3]: In beacon packets, everything clients need to know about what the network is like is an element added to the packet, such as its encryption, what rates it uses, high throughput capabilities, vendor information, etc. Each element is designated with an ID, the length of the element, and the payload.
+[^3]: In beacon packets, everything clients need to know about the network is appended as an element to the beacon packet, such as its encryption, what rates it uses, high throughput capabilities, vendor information, etc. Each element is designated with an ID, the length of the element, and the payload.
 
 ## Scripting it
 
 So that was pretty easy to do. Let's script it, as it is Python after all.
 
 ```python
-from scapy.all import (RadioTap, Dot11, Dot11Beacon, Dot11Elt sendp)
+from scapy.all import (RadioTap, Dot11, Dot11Beacon, Dot11Elt, sendp)
 
 ssids = ["Never", "Gonna", "Give", "You", "Up"]
 while True:
