@@ -76,7 +76,7 @@ phy#1
 (scapy) daniel@thinking:~$ sudo ip link set wlan0mon up
 ```
 
-So what happened here? What we did was essentially what a tool like aircrack-ng does under the hood when you set your interface into monitor mode, except here we used Linux's built-in [`iw`](https://linux.die.net/man/8/iw) and ['ip](https://linux.die.net/man/8/ip) tools to interact with our wireless interfaces. First, with `iw dev`, we show a list of all our active wireless interfaces, mine being `wlan0`. If it's active, we need to shut it down with `ip link set wlan0 down`. Next, we create our virtual interface (`wlan0`) off of the physical interface (`phy1`)[^1], using `iw phy phy1 interface add wlan0mon type monitor`. Delete our old managed interface `iw dev wlan0 del`, and we can bring it back up with `ip link set wlan0mon up`. If you didn't get any errors, the result should look something like this:
+So what happened here? What we did was essentially what a tool like aircrack-ng does under the hood when you set your interface into monitor mode, except here we used Linux's built-in [`iw`](https://linux.die.net/man/8/iw) and ['ip'](https://linux.die.net/man/8/ip) tools to interact with our wireless interfaces. First, with `iw dev`, we show a list of all our active wireless interfaces, mine being `wlan0`. If it's active, we need to shut it down with `ip link set wlan0 down`. Next, we create our virtual interface (`wlan0`) off of the physical interface (`phy1`)([^1]), using `iw phy phy1 interface add wlan0mon type monitor`. Delete our old managed interface `iw dev wlan0 del`, and we can bring it back up with `ip link set wlan0mon up`. If you didn't get any errors, the result should look something like this:
 
 ```bash
 (scapy) daniel@thinking:~$ iw dev
@@ -103,7 +103,7 @@ Usage:	iw [options] dev <devname> set channel <channel> [NOHT|HT20|HT40+|HT40-|5
 
 ## Packet Sniffing
 
-Let's dip our feet into packet sniffing first with Scapy. Using dedicated tools like [`Wireshark`](https://www.wireshark.org/) is preferred if you're trying to dig into what's in a packet with a GUI, but Scapy can do the trick as well. Let's try running the Scapy CLI.
+Let's dip our feet into packet sniffing first with Scapy. Using dedicated tools like [`Wireshark`](https://www.wireshark.org/) is preferred if you're trying to dig into what's in a packet with a GUI, but Scapy can work in a pinch as well. Let's try running the Scapy CLI.
 ```bash
 (wifi) daniel@thinking:~$ scapy
 ```
@@ -124,10 +124,10 @@ Traceback (most recent call last):
 PermissionError: [Errno 1] Operation not permitted
 ```
 
-If you run into this issue, the reason is because you're not running Scapy as root, which is necessary because access to our interfaces requires root priviledges. There are some (messy) ways around this such as with [setcap](https://linux.die.net/man/8/setcap) but that is not a great way to do things. For now, easiest way is to close the session and restart with `sudo $(which scapy)`, which will allow you to use your specific virtualenv's Python as sudo.
+If you run into this issue, the reason is because you're not running Scapy as root, which is necessary because access to our wireless interface requires root priviledges. There are some (messy) ways around this such as with [setcap](https://linux.die.net/man/8/setcap) but that is not a great way to do things. For now, easiest way is to close the session and restart with `sudo $(which scapy)`, which will allow your virtualenv's Python binary to run Scapy as root.
 ```python
 >>> sniff(iface="wlan0mon", prn=lambda x: x.summary())
-RadioTap / Dot11FCS / Dot11Beacon / SSID='MySSID' / Dot11EltRates / Dot11EltDSSSet / Dot11Elt / Dot11EltERP / Dot11EltRates / Dot11Elt / Dot11EltHTCapabilities / Dot11EltRSN / Dot11Elt / Dot11Elt / Dot11EltVendorSpecific / Dot11EltVendorSpecific / Dot11EltVendorSpecific / Dot11EltRSN
+RadioTap / Dot11FCS / Dot11Beacon / SSID='NeighborSSID' / Dot11EltRates / Dot11EltDSSSet / Dot11Elt / Dot11EltERP / Dot11EltRates / Dot11Elt / Dot11EltHTCapabilities / Dot11EltRSN / Dot11Elt / Dot11Elt / Dot11EltVendorSpecific / Dot11EltVendorSpecific / Dot11EltVendorSpecific / Dot11EltRSN
 ...
 ```
 
@@ -164,7 +164,7 @@ Now that we can sniff packets, let's try making them. Here, we can craft a beaco
            info      = 'MySSID'
 ```
 
-Here, we created a packet `beacon_pkt` where we appended each layer necessary to create a valid packet with a backslash. `RadioTap()` is the header your wireless card will fill out for you regarding physical properties like the channel. `Dot11()` is where we put information needed about who the reciever is, and who the sender is. In this case for beacon frames, `addr1` is the receiver/destination address and is set as the broadcast address, `ff:ff:ff:ff:ff:ff`. `addr2` is the transmitter/source address, which I set as `aa:bb:cc:dd:ee:ff`, but you can use any other MAC address you'd like. `addr3` is the BSSID, which is essentially the network address. Then we append `Dot11Beacon()` to designate that this is a management frame beacon packet. Finally, we add the `Dot11Elt()`, or the Dot11 element with an ID of SSID, or 0[^2]. We are now ready to send the packet!
+Here, we created a packet `beacon_pkt` where we appended each layer necessary to create a valid packet with a backslash. `RadioTap()` is the header your wireless card will fill out for you regarding physical properties like the channel. `Dot11()` is where we put information needed about who the reciever is, and who the sender is. In this case([^2]), for beacon frames, `addr1` is the receiver/destination address and is set as the broadcast address, `ff:ff:ff:ff:ff:ff`. `addr2` is the transmitter/source address, which I set as `aa:bb:cc:dd:ee:ff`, but you can use any other MAC address you'd like. `addr3` is the BSSID, which is essentially the network address. Then we append `Dot11Beacon()` to designate that this is a management frame beacon packet. Finally, we add the `Dot11Elt()`, or the Dot11 element with an ID of SSID, or 0([^3]). We are now ready to send the packet!
 
 ```python
 >>> sendp(beacon_pkt, iface="wlan0mon")
@@ -176,8 +176,9 @@ If we open up Wireshark in another window and start capturing while sending, we'
 
 ![Wireshark](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20201111/wireshark.png)
 
+[^2]: These addresses will depend on the type and subtype of the packet. Data and management frames for address fields generally are the same. Control frames however can vary widely, and may even only have only one address field. Here's a [quirk source](https://dalewifisec.wordpress.com/2014/05/17/the-to-ds-and-from-ds-fields/) for to/from DS fields.
 
-[^2]: In beacon packets, everything clients need to know about what the network is like is an element added to the packet, such as its encryption, what rates it uses, high throughput capabilities, vendor information, etc. Each element is designated with an ID, the length of the element, and the payload.
+[^3]: In beacon packets, everything clients need to know about what the network is like is an element added to the packet, such as its encryption, what rates it uses, high throughput capabilities, vendor information, etc. Each element is designated with an ID, the length of the element, and the payload.
 
 ## Scripting it
 
