@@ -33,7 +33,3 @@ The Internet of Things (IoT) is a a growing movement to network devices to the I
 
 Getting to that point on my own is still in the future, but I was able to develop a remote monitoring system using a Raspberry Pi SBC, an Arduino microcontroller, and Python to write SVE exhaust data to a Google Doc sheet.
 So stay tuned for the next post where I will go into more of the technical details of what I used and how I made it!
-
-### Edit - 2016/08/15 ###
-
-My friend, Nicholas Moran, [interviewed me about my project](https://www.youtube.com/watch?v=dPBI5-6qAzI&feature=youtu.be), where we discussed the role of the Internet of Things in industry. He also helped create and organize the [Envirotech Summit](http://envirotechsummit.org/) in Raleigh, NC where I presented this project. Check out his [LinkedIn](https://www.linkedin.com/in/nicholasamoran) for updates on new projects that he is continuously working on!

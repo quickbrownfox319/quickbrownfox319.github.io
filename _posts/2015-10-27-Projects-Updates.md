@@ -10,7 +10,7 @@ Good news everyone! A new blog post yay! -soft cheering-
 <h2>Functionality at a (very) High Level</h2>
 <p>Essentially, what it does is it looks a few days into the future in my Google calendar and finds all events. It then takes those event locations and searches Wunderground for that location's forecast in two days (Just realized I forgot to actually implement adding the event date to query Wunderground's forecast date...). Then, it pushes the forecast as a Pushbullet note to the user account. The script is hosted on a raspberry pi 2, and is run via a bash script and cronjob every day at midnight.
 </p>
-![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/weatherlocation-1.jpg)
+![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20151027/weatherlocation-1.jpg)
 
 
 <br>If you'd like to see the entire code, you can visit the page 
@@ -42,13 +42,13 @@ That's about it for the LocationWeather updates! Right now it's sitting on my de
 In other news, I have also made progress with my remote gas monitor, which currently is being hosted on a RPi2 and Arduino Nano.
 </p>
 
-<br>![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/gasmonitor-setup.jpg)
+<br>![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20151027/gasmonitor-setup.jpg)
 
 <p>
 I have tried using the Particle Photon which has built in wifi, but due to complications related to the site, I had to scrap it. The gas monitor so far uses the pi to read in serial data gathered by the Nano, and stores it as a csv locally as well as writes it to a Google Sheets doc, which I thought was pretty nifty.
 </p>
-<br>![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/gasmonitor-pi.jpg)
-<br>![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/gasmonitor-nano.jpg)
+<br>![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20151027/gasmonitor-pi.jpg)
+<br>![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20151027/gasmonitor-nano.jpg)
 <p>
 There are still a lot of rough edges that I need to work on regarding connectivity, but it kind of works as intended. You'll have to wait for my next post about that one though, so hold on to the edge of your seats! Hopefully the next post won't be in another several months.  
 </p>

@@ -1,6 +1,6 @@
 At work this year, I wanted to make my secret santa gift a little interesting. Having been working with wifi for a large part of the year, I thought it would be fun to make a wifi ctf as part of the process.
 
-![Working setup](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/secret_santa/hw-overview.jpg)
+![Working setup](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20191229/hw-overview.jpg)
 
 ## Overview
 The overall idea is pretty simple: the recipient receives a "North Pole temperature sensor", which is really an ESP32 with a display showing the RSSI of the hidden access point, where the real present is. The recipient has to figure out that the values change from simply moving around, clueing in that it is measuring something, upon which he'll quickly realize it's RSSI from wifi packets. Following the tracker should more or less lead to the general location. However, an alternative solutionis that once he realizes it's an AP, he can try to hack/ssh into the AP and find the flag, which will tell him exactly where the present is.
@@ -8,7 +8,7 @@ The overall idea is pretty simple: the recipient receives a "North Pole temperat
 ## Theory
 For this game of "hot or cold" to work, we have to understand what RSSI is. RSSI is the "received signal strength indicator", which as its name implies shows how strong the signal is on a relative scale. This scale differs between manufacturers, but overall the same idea should be conveyed the same - the hotter you are, the higher the value, and the colder you are, the smaller the value. This information is given through what's called the Radiotap Header, which is metadata your wifi card tacks on to each wifi packet it receives, one of them being the signal strength of that packet.
 
-![Radiotap Header Example](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/secret_santa/radiotap.png)
+![Radiotap Header Example](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20191229/radiotap.png)
 
 You can see this for yourself if you use a tool such as Wireshark and put your wireless card into monitor mode. Packets you capture should have a section for the Radiotap header with this information.
 
@@ -190,4 +190,4 @@ void loop()
 
 ## In Action
 
-![Action shot!](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/secret_santa/inaction.gif)
+![Action shot!](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20191229/inaction.gif)
