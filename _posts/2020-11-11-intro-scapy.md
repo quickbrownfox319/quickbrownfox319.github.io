@@ -177,7 +177,7 @@ If we open up Wireshark in another window and start capturing while sending, we'
 ![Wireshark](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20201111/wireshark.png)
 
 
-[^2] In beacon packets, everything clients need to know about what the network is like is an element added to the packet, such as its encryption, what rates it uses, high throughput capabilities, vendor information, etc. Each element is designated with an ID, the length of the element, and the payload.
+[^2]: In beacon packets, everything clients need to know about what the network is like is an element added to the packet, such as its encryption, what rates it uses, high throughput capabilities, vendor information, etc. Each element is designated with an ID, the length of the element, and the payload.
 
 ## Scripting it
 
