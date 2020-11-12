@@ -23,7 +23,6 @@ The Raspberry Pi can be thought of as the "brains" or the controller of the syst
 ## Code
 ### Overview
 The Raspberry Pi runs a combination of different scripts to make sure everything works. A Python script using the [gspread wrapper](https://github.com/burnash/gspread) writes collected data from the MQ135 sensor via the Google Sheets API. Once establishing a connection to Google Sheets, it creates a connection to the Arduino via PySerial. The Arduino has its own script where it takes a measurement every few minutes. Finally, data is written to a CSV file that's stored directly on the Pi itself. The Pi also logs any errors that might have occured for later debugging. The way it's accessed is through SSH once the Pi establishes a connection.
-All code can also be found on my GitHub repository [here](https://github.com/quickbrownfox319/GasSensor).
 
 
 
