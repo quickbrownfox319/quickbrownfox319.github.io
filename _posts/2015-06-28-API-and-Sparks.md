@@ -19,7 +19,9 @@ All in all, it's pretty straightforward. Next time, I'll work on combining the t
 
 <h2>Spark Core</h2>
 <p>What's also exciting was setting up the Spark Core today by what used to be known as Spark, which has recently rebranded itself as Particle.<br>
+
 ![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20150628/spark-core.jpg)</br>
-For the uninformed, the Spark Core is a Wifi capable microcontroller. The programming is the same as the Arduino, making the transition very easy. However, what sets the Core apart is the beautiful web interface they have set up. Within minutes, I was able to get connected to the Wifi network and begin flashing code over the air so to speak. Their Android app is also very simple yet beautifully designed, with the ability to control the individual pins. You can see their website [here](https://www.particle.io/?redirected=true). This device will be another component to my planned IoT system.
+For the uninformed, the Spark Core is a Wifi capable microcontroller. The programming is the same as the Arduino, making the transition very easy. However, what sets the Core apart is the beautiful web interface they have set up. Within minutes, I was able to get connected to the Wifi network and begin flashing code over the air so to speak. Their Android app is also very simple yet beautifully designed, with the ability to control the individual pins. You can see their website [here](https://www.particle.io/?redirected=true).
+This device will be another component to my planned IoT system.
 
 That's it for today. Hopefully next time I will have more substantial progress going on.
