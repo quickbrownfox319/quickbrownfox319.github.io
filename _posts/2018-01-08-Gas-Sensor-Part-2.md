@@ -176,7 +176,5 @@ I posted these images in a previous post (10/27/15), but should be of more value
 
 ![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20151027/gasmonitor-nano.jpg "Arduino Nano with MQ135 gas sensor")
 
-![Alt text](https://raw.githubusercontent.com/quickbrownfox319/quickbrownfox319.github.io/master/images/20151027/gasmonitor-setup.jpg "Setup next to carbon filters")
-
 # Final Thoughts
 This project is by no means perfect or even very good. However, it means a lot to me because it allowed me to realize that I wanted to pursue a career in computer & electrical engineering. Working through how to code on hardware platforms to using APIs showed me how much there is to learn out there, and gave me the confidence and desire to be a part of this fast-paced industry. I believe everyone who is curious should pick up a project of their own to work on to completion and feel the same sense of accomplishment. So effectively, this project and post simultaneously closes my environmental engineering chapter and opens up my ECE chapter. I hope you join me as I dive into this perpetual quest of learning.
