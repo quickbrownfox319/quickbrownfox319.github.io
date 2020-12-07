@@ -19,10 +19,10 @@ Here's a short example:
 Host my-server
     Hostname myserver.com
     User iamuser
-    IdentityFile ~/.ssh/my-server-key.pub
+    IdentityFile ~/.ssh/my-server-key
 ```
 
-Here, `Host my-server` is your alias to the account you're SSHing to, with input parameters of your server hostname, username, and the public key file location. The manual way of SSHing into your server would be with a command like `ssh iamuser@myserver.com`, in which it'd ask you to provide the username/password if that's enabled, or allow/deny you based on the public key you provide.
+Here, `Host my-server` is your alias to the account you're SSHing to, with input parameters of your server hostname, username, and the private key file location. The manual way of SSHing into your server would be with a command like `ssh iamuser@myserver.com`, in which it'd ask you to provide the username/password if that's enabled, or allow/deny you based on the public key you provide.
 However, with this configuration, you can just run `ssh my-server` to use your SSH identity file to acces your server, given that you've set one up.
 
 # Using SSH config with Github
@@ -34,19 +34,19 @@ Host gh-personal
     Hostname github.com
     User git
     AddKeysToAgent yes
-    IdentityFile ~/.ssh/gh-personal.pub
+    IdentityFile ~/.ssh/gh-personal
 
 # This is my work Github
 Host gh-work
     Hostname github.com
     User git
     AddKeysToAgent yes
-    IdentityFile ~/.ssh/gh-work.pub
+    IdentityFile ~/.ssh/gh-work
 ```
 
-Here, we have added two identities to our config, one for our personal Github account, and one for our work account. The `AddKeysToAgent` parameter tells ssh-agent to add the private key used for authentication if it has not been added already. When we connect to our repo with our respective SSH identities, SSH will use that respective public key to access the repository.
+Here, we have added two identities to our config, one for our personal Github account, and one for our work account. The `AddKeysToAgent` parameter tells ssh-agent to add the private key used for authentication if it has not been added already. When we connect to our repo with our respective SSH identities, SSH will use that respective key to access the repository.
 
-When you clone a repo with SSH, you can direct git which SSH configuration to use. Cloning with `git clone git@github.com:a-github-account/a-repository` is saying to use whatever your SSH key is for user `git` at `github.com` to clone `a-repository`, assuming you have access rights. To direct SSH to use, for example, my personal public key file, I would need to change it to `git clone git@gh-personal:a-github-account/a-repository`. This will tell git to clone using my `gh-personal` SSH config.
+When you clone a repo with SSH, you can direct git which SSH configuration to use. Cloning with `git clone git@github.com:a-github-account/a-repository` is saying to use whatever your SSH key is for user `git` at `github.com` to clone `a-repository`, assuming you have access rights. To direct SSH to use, for example, my personal account key file, I would need to change it to `git clone git@gh-personal:a-github-account/a-repository`. This will tell git to clone using my `gh-personal` SSH config.
 
 If you need to ever tweak the SSH configuration used for a particular repo, you can access the `.git/config` file in the repository, and change the remote url to match the account you'd like to use from your SSH config file.
 
