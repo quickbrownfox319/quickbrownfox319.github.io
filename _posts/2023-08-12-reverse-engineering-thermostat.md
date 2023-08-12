@@ -3,16 +3,15 @@ layout: post
 title: "Exploring a Smart Thermostat"
 ---
 
-# Initial Reconnaissance
-
-I was doing some tidying up and stumbled upon this Honeywell "smart" thermostat that never got installed.
+I was doing some tidying up and stumbled upon this "smart" thermostat that never got installed, and decided to take a poke at it.
 
 Basically, you connect it to your home's heating/cooling system where it provides a user interface via its touch display.
 You can additionally connect it to your home wifi network for remote access capabilities through the Resideo [Total Connect Comfort app](https://play.google.com/store/apps/details?id=com.honeywell.mobile.android.totalComfort&hl=en_US&gl=US).
 
 As for why it's Resideo and not Honeywell, it seems like Resideo spun off from Honeywell back in 2018 and handles all of the connected home climate control and security aspects for Honeywell.
 
-## Physical Inspection
+
+# Initial Reconnaissance
 
 Front
 ![Outer chassis front](/images/20230812/outer-front.JPG)
@@ -23,14 +22,12 @@ Back
 Connector plate
 ![Connector plate](/images/20230812/connector-plate.JPG)
 
-
 Of course, nothing's fun without cracking it open and seeing the guts in all their entirety.
 Opening it up was relatively easy with just clips that you could undo with a spudger.
 The touch screen display is held to the main PCB via a ribbon cable.
 
 ![Annotated](/images/20230812/annotated.JPG)
 ![Main PCB back](/images/20230812/main-pcb-back.JPG)
-
 
 We can speculate on the purpose of some of these components.
 The giant Atmel MPU is the main processor that has an LCD controller for touch screens and network connectivity capabilities like ethernet and CAN, according to the [datasheet](https://ww1.microchip.com/downloads/aemDocuments/documents/MPU32/ProductDocuments/DataSheets/SAM9X35-Data-Sheet-DS60001730.pdf).
@@ -77,7 +74,7 @@ So obviously the next thing I wanted to do was to power the device on and see ho
 After a bit of digging into how to [wire up thermostats](https://www.ifixit.com/News/30317/what-all-those-letters-mean-on-your-thermostats-wiring), it became clear that I needed 24V AC voltage to run the device, which I don't have just lying around on my desk.
 
 To give a bit of background, non-smart thermostats don't normally have power continuously running through them, and only connect the heater signal when required.
-Smart thermostats however always need power to work, requiring what's called the [common wire](https://smartthermostatguide.com/thermostat-c-wire-explained/), also known as the C-wire, which provides a return through the R-wire for continous power.
+Smart thermostats however always need power to work, requiring what's called the [common wire](https://smartthermostatguide.com/thermostat-c-wire-explained/), also known as the C-wire, which provides a return through the R-wire for continuous power.
 This voltage gets transformed into DC power and downconverted into a voltage an embedded system can handle, which is typically from 1.8V to 5V.
 
 Some smart thermostats like the ubiquitous Nest thermostats use a [technique](https://www.honeywellhome.com/us/en/support/what-is-phantom-power-or-power-stealing/) called "phantom power" or "power stealing" to trickle charge a battery or a super capacitor by rapidly turning on and off the HVAC system. It's a cool idea, but can [cause problems](https://smartthermostatguide.com/no-c-wire-install-a-nest-thermostat-at-your-own-risk/) for some HVAC systems.
@@ -109,7 +106,7 @@ Based on this, we have at least four signal lines we have to connect, besides gr
 - CIPO - Controller in peripheral out.
 - CS/CE - Chip select or chip enable.
 - GND - Pretty much any time you're wiring something up you should have this connected if it's available.
-- VCC - ONLY if the device is OFF! If the device is powered already, leave this disconnected. Tigard also has a handy ability to set the target supply voltage, so that's something you have to lookup on a case by case basis. Both SPI chips in this case are 3.3V, so we can leave it on that.
+- VCC - ONLY if the device is OFF! If the device is powered already, leave this disconnected. Tigard also has a handy ability to set the target supply voltage, so that's something you have to look up on a case by case basis. Both SPI chips in this case are 3.3V, so we can leave it on that, so long as the device is off when we're talking directly to the chips.
 
 Typically, the term controller in these situations means the main microcontroller being used to talk to the peripheral.
 This should guide your wiring as well, where you connect the microcontroller's TX line to the peripheral's RX for COPI, and vice versa.
@@ -145,16 +142,16 @@ I also connected my Analog Discovery 2 to sniff the lines as I was reading the d
 Mostly, I wanted to get more usage out of my AD2 for fun as it doesn't get enough action. :)
 
 
-## Chatting to the Device
+## Chatting to Flash #1
 
 We can send and receive data directly now that everything's set up to go.
 One of the ways we can get started is issue a sort of "hello world" by asking the device for its device ID, or JEDEC ID.
-Typically this is done by issuing the byte 0x9F to the peripheral.
+Typically this is done by issuing the command 0x9F to the peripheral.
 In the product sheet, we can see that in SPI mode we can send 0x9F and receive three bytes back, with each byte being the manufacturer ID, memory type, and capacity in that order.
 
 ![is25lp jedec id](/images/20230812/is25lp-spi-read.png)
 
-We can write a Python script to send this simple command using the [PyFtdi library](https://eblot.github.io/pyftdi/).
+We can write a Python script to send this command using the [PyFtdi library](https://eblot.github.io/pyftdi/).
 We can modify the Tigard [example](https://github.com/tigard-tools/tigard#spi) to give us the following script below:
 
 ```python
@@ -176,11 +173,11 @@ print(jedec_id)
 ```
 
 This is Tigard specific, but our script is choosing to use the second port on the Tigard for interfacing.
-We then configure our SPI interface to use a frequency of 1MHz, and mode 0 according to the data sheet.
-[Mode](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface#Clock_polarity_and_phase) is basically when to sample data on the clock signal, with mode 0 being the rising edge of the clock. The data sheet will tell you which one to use specifically for your operation.
-Finally, `spi.exchange()` sends a Python list of bytes, and returns the specified number of bytes returned from the peripheral, or 3 in this case, since that's what the data sheet says we'll get.
+We then configure our SPI interface to use a frequency of 1MHz, and mode 0([^5]) according to the data sheet.
+Finally, `spi.exchange` sends a Python list of bytes, and returns a specified number of bytes returned from the peripheral.
+In our case it's three bytes, since that's what the data sheet says we'll get in response to our 0x9F command.
 
-Running this with our Tigard connected should give us something like this response:
+Running this with our Tigard connected should give us something like this output:
 ```
 $ python read_id.py
 Available interfaces:
@@ -191,21 +188,23 @@ Available interfaces:
 bytearray(b'\x9D\x60\x18')
 ```
 
-Comparing our result matches what the data sheet describes in Table 8.7 below for an IS25LP128F chip, which is what we have. 
+Comparing our result to Table 8.7 from the datasheet matches an IS25LP128F chip, which is what we have. 
 
 ![25lp device id](/images/20230812/is25lp-prodid.png)
 
-Cool! This is helpful for giving a sort of first pass on checking if a device works (dark foreboding ahead here).
+This is helpful for giving a sort of first pass on checking if a device works (dark foreboding ahead here).
 
 Using our AD2 with Digilent's Waveforms logic analyzer function shows us a nice readout to confirm our device functionality.
 
 ![25lp spi read device id](/images/20230812/25lp-spi-read-product-id.png)
 
 
+[^5]: [Mode](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface#Clock_polarity_and_phase) is basically when to sample data on the clock signal, with mode 0 being the rising edge of the clock. The data sheet will tell you which one to use specifically for your operation.
+
 ## Dumping Flash Chip #1
 So that's cool and all, but how about dumping the entire SPI flash?
 We could continue with scripting with Python and PyFTDI (and I may write about this later), but there's a program that we can use to cheese this called [flashrom](https://flashrom.org/).
-Flashrom is an open source project that basically compiles support for many kinds of flash chips for issuing common commands such as writing, reading, or erasing.
+Flashrom is an open source project that basically compiles support for many kinds of flash chips for common operations such as writing, reading, or erasing.
 
 We can try running flashrom directly to see if it detects the flash chip like this (tailored for Tigard's FTDI 2232H since that's what I'm using):
 
@@ -281,8 +280,8 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 4502988       0x44B5CC        XML document, version: "1.0"
 ```
 
-Note that binwalk can and will give you lots of false positives, as it's just checking for any match to known file signatures.
-A quick way to tell is to check if the last digit is odd, which could indicate the result is not aligned in a typical way.
+Note that binwalk can and will give you lots of false positives, as it's just checking for any matches to known file signatures.
+A quick way to check is see if the last digit is odd, which could indicate the result is not aligned in a typical way.
 So these results are not very reassuring, and I can say that the LZMA result also did not actually produce anything meaningful.
 
 We can also check to see if there's any kind of encryption or compression going on here with:
