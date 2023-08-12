@@ -102,7 +102,7 @@ Unlike asynchronous protocols like UART, it requires having a clock signal to dr
 
 Based on this, we have at least four signal lines we have to connect, besides ground and maybe VCC:
 - CLK - Needed to synchronize and drive the communication.
-- COPI([^4]) - Controller out peripheral in.
+- COPI([^5]) - Controller out peripheral in.
 - CIPO - Controller in peripheral out.
 - CS/CE - Chip select or chip enable.
 - GND - Pretty much any time you're wiring something up you should have this connected if it's available.
@@ -111,7 +111,7 @@ Based on this, we have at least four signal lines we have to connect, besides gr
 Typically, the term controller in these situations means the main microcontroller being used to talk to the peripheral.
 This should guide your wiring as well, where you connect the microcontroller's TX line to the peripheral's RX for COPI, and vice versa.
 
-[^4]: Previously these were known as MOSI/MISO standing in for "master" and "slave". Recently this has changed for the more acceptable "controller" and "peripheral" terminology, and is IMO clearer as well. However you will doubtless see the MOSI/MISO terminology in older datasheets, so something to be aware of.
+[^5]: Previously these were known as MOSI/MISO standing in for "master" and "slave". Recently this has changed for the more acceptable "controller" and "peripheral" terminology, and is IMO clearer as well. However you will doubtless see the MOSI/MISO terminology in older datasheets, so something to be aware of.
 
 
 ## SOIC16 Flash
@@ -173,7 +173,7 @@ print(jedec_id)
 ```
 
 This is Tigard specific, but our script is choosing to use the second port on the Tigard for interfacing.
-We then configure our SPI interface to use a frequency of 1MHz, and mode 0([^5]) according to the data sheet.
+We then configure our SPI interface to use a frequency of 1MHz, and mode 0([^6]) according to the data sheet.
 Finally, `spi.exchange` sends a Python list of bytes, and returns a specified number of bytes returned from the peripheral.
 In our case it's three bytes, since that's what the data sheet says we'll get in response to our 0x9F command.
 
@@ -199,7 +199,7 @@ Using our AD2 with Digilent's Waveforms logic analyzer function shows us a nice 
 ![25lp spi read device id](/images/20230812/25lp-spi-read-product-id.png)
 
 
-[^5]: [Mode](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface#Clock_polarity_and_phase) is basically when to sample data on the clock signal, with mode 0 being the rising edge of the clock. The data sheet will tell you which one to use specifically for your operation.
+[^6]: [Mode](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface#Clock_polarity_and_phase) is basically when to sample data on the clock signal, with mode 0 being the rising edge of the clock. The data sheet will tell you which one to use specifically for your operation.
 
 ## Dumping Flash Chip #1
 So that's cool and all, but how about dumping the entire SPI flash?
